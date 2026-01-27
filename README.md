@@ -1,4 +1,4 @@
-# Rentfix Maintenance App
+# Rentfix
 
 React SPA connecting tenants and landlords for transparent maintenance tracking.
 
