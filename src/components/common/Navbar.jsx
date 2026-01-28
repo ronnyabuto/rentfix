@@ -15,9 +15,6 @@ const Navbar = () => {
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               <h1 className="text-2xl font-bold text-blue-600">Rentfix</h1>
-              <span className="ml-2 text-sm text-gray-500">
-                {isTenant ? 'Tenant Portal' : 'Landlord Overview'}
-              </span>
             </div>
 
             <div className="hidden md:ml-6 md:flex md:space-x-8">
@@ -46,9 +43,7 @@ const Navbar = () => {
                   </Link>
                 </>
               ) : (
-                <span className="px-1 pt-1 text-sm font-medium text-gray-700">
-                  Real-time status of your property portfolio and maintenance requests
-                </span>
+                <span className="px-1 pt-1 text-sm font-medium text-gray-700"></span>
               )}
             </div>
           </div>
@@ -75,7 +70,7 @@ const Navbar = () => {
                   {currentUser?.fullName}
                 </p>
                 {!isTenant && (
-                  <p className="text-xs text-gray-500">Premium Admin</p>
+                  <p className="text-xs text-gray-500">Admin</p>
                 )}
               </div>
             </div>

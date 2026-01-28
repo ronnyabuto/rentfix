@@ -16,9 +16,11 @@ import RoleRoute from "./RoleRoute.jsx";
 export default function AppRouter() {
   return (
     <Routes>
+      {/* Public pages (No Layout) */}
+      <Route path="/" element={<Home />} />
+
       <Route element={<MainLayout />}>
-        {/* Public pages */}
-        <Route path="/" element={<Home />} />
+        {/* About Page */}
         <Route path="/about" element={<About />} />
 
         {/* Tenant routes */}
