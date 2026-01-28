@@ -17,44 +17,41 @@ export default function AppRouter() {
   return (
     <Routes>
       {/* Public pages (No Layout) */}
+      {/* Public pages (No Layout) */}
       <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
 
-      <Route element={<MainLayout />}>
-        {/* About Page */}
-        <Route path="/about" element={<About />} />
+      {/* Tenant routes (Self-contained Layout) */}
+      <Route
+        path="/tenant/dashboard"
+        element={
+          <RoleRoute allow="tenant">
+            <TenantDashboardPage />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/tenant/report"
+        element={
+          <RoleRoute allow="tenant">
+            <ReportIssuePage />
+          </RoleRoute>
+        }
+      />
 
-        {/* Tenant routes */}
-        <Route
-          path="/tenant/dashboard"
-          element={
-            <RoleRoute allow="tenant">
-              <TenantDashboardPage />
-            </RoleRoute>
-          }
-        />
-        <Route
-          path="/tenant/report"
-          element={
-            <RoleRoute allow="tenant">
-              <ReportIssuePage />
-            </RoleRoute>
-          }
-        />
+      {/* Landlord routes (Self-contained Layout) */}
+      <Route
+        path="/landlord/dashboard"
+        element={
+          <RoleRoute allow="landlord">
+            <LandlordDashboardPage />
+          </RoleRoute>
+        }
+      />
 
-        {/* Landlord routes */}
-        <Route
-          path="/landlord/dashboard"
-          element={
-            <RoleRoute allow="landlord">
-              <LandlordDashboardPage />
-            </RoleRoute>
-          }
-        />
-
-        {/* Redirect helpers */}
-        <Route path="/tenant" element={<Navigate to="/tenant/dashboard" replace />} />
-        <Route path="/landlord" element={<Navigate to="/landlord/dashboard" replace />} />
-      </Route>
+      {/* Redirect helpers */}
+      <Route path="/tenant" element={<Navigate to="/tenant/dashboard" replace />} />
+      <Route path="/landlord" element={<Navigate to="/landlord/dashboard" replace />} />
 
       {/* Fallback */}
       <Route path="*" element={<NotFound />} />

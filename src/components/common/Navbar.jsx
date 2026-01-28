@@ -43,7 +43,7 @@ const Navbar = () => {
                   </Link>
                 </>
               ) : (
-                <span className="px-1 pt-1 text-sm font-medium text-gray-700"></span>
+                null
               )}
             </div>
           </div>
