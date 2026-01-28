@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <h1 className="text-2xl font-bold text-blue-600">Rentix</h1>
+              <h1 className="text-2xl font-bold text-blue-600">Rentfix</h1>
               <span className="ml-2 text-sm text-gray-500">
                 {isTenant ? 'Tenant Portal' : 'Landlord Overview'}
               </span>

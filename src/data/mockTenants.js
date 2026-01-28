@@ -10,7 +10,7 @@ export const MOCK_USERS = [
     {
         id: "admin1",
         fullName: "Kimberly (Admin)",
-        email: "kimberly@rentix.com",
+        email: "kimberly@rentfix.com",
         role: "landlord",
         avatar: "https://i.pravatar.cc/150?u=admin1",
     },

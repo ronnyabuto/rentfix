@@ -22,7 +22,7 @@ const MainLayout = () => {
 
             {/* Footer */}
             <footer className="bg-white border-t py-4 text-center text-gray-500 text-sm">
-                <p>© {new Date().getFullYear()} Rentix Property Management</p>
+                <p>© {new Date().getFullYear()} Rentfix Property Management</p>
             </footer>
         </div>
     );

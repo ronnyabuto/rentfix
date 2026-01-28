@@ -1,5 +1,5 @@
 /**
- * Constants for Rentix Application
+ * Constants for Rentfix Application
  * 
  * We use these constants to avoid typos. Instead of typing "In Progress" everywhere
  * (Running the risk of typing "in progress" or "Inprogress"), we import STATUS.
