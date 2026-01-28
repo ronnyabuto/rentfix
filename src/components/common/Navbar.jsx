@@ -49,13 +49,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center">
-            <button
-              onClick={() => switchUser(isTenant ? 'admin1' : 'u1')}
-              className="btn-secondary flex items-center mr-4"
-            >
-              <FaUser className="mr-2" />
-              Switch to {isTenant ? 'Landlord' : 'Tenant'}
-            </button>
+            {/* User switcher removed - handled in Home screen */}
 
             <div className="flex items-center">
               <div className="flex-shrink-0">
