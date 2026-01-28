@@ -9,8 +9,8 @@ export const MOCK_USERS = [
     // THE LANDLORD
     {
         id: "admin1",
-        fullName: "Robert Chen",
-        email: "robert@rentix.com",
+        fullName: "Kimberly (Admin)",
+        email: "kimberly@rentix.com",
         role: "landlord",
         avatar: "https://i.pravatar.cc/150?u=admin1",
     },
@@ -18,24 +18,24 @@ export const MOCK_USERS = [
     // THE TENANTS
     {
         id: "u1",
-        fullName: "Sarah Jenkins",
-        email: "sarah@example.com",
+        fullName: "Tamara",
+        email: "tamara@example.com",
         role: "tenant",
         avatar: "https://i.pravatar.cc/150?u=u1",
         propertyId: "p1", // Lives in Skyline 402
     },
     {
         id: "u2",
-        fullName: "Marcus Thorne",
-        email: "marcus@example.com",
+        fullName: "Nyabuto",
+        email: "nyabuto@example.com",
         role: "tenant",
         avatar: "https://i.pravatar.cc/150?u=u2",
         propertyId: "p2", // Lives in Garden Villas 12B
     },
     {
         id: "u3",
-        fullName: "Elena Rodriguez",
-        email: "elena@example.com",
+        fullName: "Mugambi",
+        email: "mugambi@example.com",
         role: "tenant",
         avatar: "https://i.pravatar.cc/150?u=u3",
         propertyId: "p3", // Lives in Downtown Lofts 305

@@ -13,9 +13,9 @@ export const MOCK_ISSUES = [
         title: "Kitchen faucet leaking significantlly",
         description: "Water is pooling under the cabinet since yesterday evening. I've tried tightening it but it keeps dripping.",
         category: CATEGORY.PLUMBING,
-        priority: PRIORITY.HIGH,
+        prioriy: PRIORITY.HIGH,
         status: STATUS.SCHEDULED,
-        tenantId: "u1", // Sarah Jenkins
+        tenantId: "u1", // Tamara
         propertyId: "p1", // Skyline 402
         createdAt: "2023-09-20T10:30:00Z",
         photos: [
@@ -45,7 +45,7 @@ export const MOCK_ISSUES = [
         category: CATEGORY.HVAC,
         priority: PRIORITY.MEDIUM,
         status: STATUS.IN_PROGRESS,
-        tenantId: "u2", // Marcus Thorne
+        tenantId: "u2", // Nyabuto
         propertyId: "p2", // Garden Villas 12B
         createdAt: "2023-09-18T09:00:00Z",
         photos: [
@@ -68,7 +68,7 @@ export const MOCK_ISSUES = [
         category: CATEGORY.STRUCTURAL,
         priority: PRIORITY.LOW,
         status: STATUS.PENDING,
-        tenantId: "u3", // Elena Rodriguez
+        tenantId: "u3", // Mugambi
         propertyId: "p3", // Downtown Lofts 305
         createdAt: "2023-09-22T16:20:00Z",
         photos: [], // No photos

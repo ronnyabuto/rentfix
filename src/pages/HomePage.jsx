@@ -30,15 +30,15 @@ const HomePage = () => {
 
             <section className="grid md:grid-cols-3 gap-8 mt-12">
                 <div className="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-semibold mb-2">📷 Snap & Report</h3>
+                    <h3 className="text-lg font-semibold mb-2">Snap & Report</h3>
                     <p className="text-gray-600">Take a photo of the issue and upload it instantly.</p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-semibold mb-2">⏱️ Real-time Updates</h3>
+                    <h3 className="text-lg font-semibold mb-2">Real-time Updates</h3>
                     <p className="text-gray-600">Know exactly when your repair is scheduled.</p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-semibold mb-2">🤝 Better Communication</h3>
+                    <h3 className="text-lg font-semibold mb-2">Better Communication</h3>
                     <p className="text-gray-600">No more lost text messages or ignored calls.</p>
                 </div>
             </section>
