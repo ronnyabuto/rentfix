@@ -35,7 +35,7 @@ export default function Home() {
           role="button"
           tabIndex={0}
         >
-          <div className="home-role-title">Tenant ({tenant?.fullName})</div>
+          <div className="home-role-title">Tenant</div>
           <div className="home-role-sub">Report and track issues</div>
         </div>
 
@@ -45,7 +45,7 @@ export default function Home() {
           role="button"
           tabIndex={0}
         >
-          <div className="home-role-title">Landlord ({landlord?.fullName})</div>
+          <div className="home-role-title">Landlord</div>
           <div className="home-role-sub">Manage repair requests</div>
         </div>
 
