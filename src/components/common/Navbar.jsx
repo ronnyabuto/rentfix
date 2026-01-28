@@ -5,8 +5,8 @@ import { FaHome, FaClipboardList, FaCog, FaUser } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
 
 const Navbar = () => {
-  const { state, dispatch } = useAppContext();
-  const isTenant = state.userType === 'tenant';
+  const { currentUser, switchUser } = useAppContext();
+  const isTenant = currentUser?.role === 'tenant';
 
   return (
     <nav className="bg-white shadow-sm border-b">
@@ -19,7 +19,7 @@ const Navbar = () => {
                 {isTenant ? 'Tenant Portal' : 'Landlord Overview'}
               </span>
             </div>
-            
+
             <div className="hidden md:ml-6 md:flex md:space-x-8">
               {isTenant ? (
                 <>
@@ -55,24 +55,24 @@ const Navbar = () => {
 
           <div className="flex items-center">
             <button
-              onClick={() => dispatch({ type: 'TOGGLE_USER_TYPE' })}
+              onClick={() => switchUser(isTenant ? 'admin1' : 'u1')}
               className="btn-secondary flex items-center mr-4"
             >
               <FaUser className="mr-2" />
               Switch to {isTenant ? 'Landlord' : 'Tenant'}
             </button>
-            
+
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                   <span className="text-blue-600 font-semibold">
-                    {state.currentUser.name.charAt(0)}
+                    {currentUser?.fullName.charAt(0)}
                   </span>
                 </div>
               </div>
               <div className="ml-3">
                 <p className="text-sm font-medium text-gray-700">
-                  {state.currentUser.name}
+                  {currentUser?.fullName}
                 </p>
                 {!isTenant && (
                   <p className="text-xs text-gray-500">Premium Admin</p>
