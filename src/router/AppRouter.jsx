@@ -2,8 +2,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout.jsx";
 
-import HomePage from "../pages/HomePage.jsx";
-import AboutPage from "../pages/AboutPage.jsx";
+import Home from "../pages/Home.jsx";
+import About from "../pages/About.jsx";
 
 import TenantDashboardPage from "../pages/tenant/TenantDashboardPage.jsx";
 import ReportIssuePage from "../pages/tenant/ReportIssuePage.jsx";
@@ -18,8 +18,8 @@ export default function AppRouter() {
     <Routes>
       <Route element={<MainLayout />}>
         {/* Public pages */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
 
         {/* Tenant routes */}
         <Route
