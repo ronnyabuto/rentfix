@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout.jsx";
 
 import Home from "../pages/Home.jsx";
+import RoleSelection from "../pages/RoleSelection.jsx";
 import About from "../pages/About.jsx";
 
 import TenantDashboardPage from "../pages/tenant/TenantDashboardPage.jsx";
@@ -17,8 +18,8 @@ export default function AppRouter() {
   return (
     <Routes>
       {/* Public pages (No Layout) */}
-      {/* Public pages (No Layout) */}
       <Route path="/" element={<Home />} />
+      <Route path="/start" element={<RoleSelection />} />
       <Route path="/about" element={<About />} />
 
       {/* Tenant routes (Self-contained Layout) */}
