@@ -16,10 +16,10 @@ const AboutPage = () => {
 
             <h2 className="text-xl font-semibold mb-4">The Team (Moringa Project)</h2>
             <ul className="space-y-2">
-                <li className="flex items-center"><span className="w-24 font-bold">Person 1:</span> Layouts & Pages</li>
-                <li className="flex items-center"><span className="w-24 font-bold">Person 2:</span> UI Components</li>
-                <li className="flex items-center"><span className="w-24 font-bold">Person 3:</span> Data & Logic</li>
-                <li className="flex items-center"><span className="w-24 font-bold">Person 4:</span> Routing & Navigation</li>
+                <li className="flex items-center"><span className="w-24 font-bold">Kimberly:</span> Layouts & Pages</li>
+                <li className="flex items-center"><span className="w-24 font-bold">Tamara:</span> UI Components</li>
+                <li className="flex items-center"><span className="w-24 font-bold">Nyabuto:</span> Data & Logic</li>
+                <li className="flex items-center"><span className="w-24 font-bold">Mugambi:</span> Routing & Navigation</li>
             </ul>
         </div>
     );
