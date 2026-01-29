@@ -1,79 +1,47 @@
-import { Link } from "react-router-dom";
-import { FaUsers, FaArrowLeft, FaCheck, FaRocket, FaHandshake, FaLightbulb } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function About() {
-  return (
-    <div className="about-page">
-      {/* Navigation (Simple) */}
-      <nav className="about-nav">
-        <Link to="/" className="about-back-btn">
-          <FaArrowLeft /> Back to Home
-        </Link>
-      </nav>
+  const nav = useNavigate();
 
-      <div className="about-hero-wrapper">
-        <div className="about-hero-content">
-          <div className="about-badge">The Story</div>
-          <h1 className="about-hero-title">Reimagining Property <br /><span className="text-highlight">Communication.</span></h1>
-          <p className="about-hero-sub">
-            We are building the future of tenant-landlord relationships.
-            No more lost emails, ignored calls, or delayed repairs.
+  const team = [
+    { name: "Kimberly", role: "Layouts & Pages" },
+    { name: "Tamara", role: "UI Components & Styling" },
+    { name: "Nyabuto", role: "Data & Logic" },
+    { name: "Mugambi", role: "Routing & Navigation" },
+  ];
+
+  return (
+    <div className="l-simple-page">
+      <header className="t-simple-top">
+        <div>
+          <div className="t-simple-brand">Rentfix</div>
+          <div className="t-simple-sub">About the Team</div>
+        </div>
+
+        <button className="t-simple-logout" onClick={() => nav("/")}>
+          Back Home
+        </button>
+      </header>
+
+      <main className="t-simple-main">
+        <h2 className="t-simple-h2" style={{ marginBottom: 18 }}>Project Team</h2>
+
+        <div className="t-simple-list">
+          {team.map((member) => (
+            <div key={member.name} className="t-simple-card">
+              <div className="t-simple-title">{member.name}</div>
+              <div className="t-simple-meta">{member.role}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: 24, padding: 22, background: "#f9fafb", borderRadius: 8 }}>
+          <div className="t-simple-title">Rentfix Application</div>
+          <p className="t-simple-desc">
+            A property management solution connecting tenants and landlords for efficient maintenance tracking.
           </p>
         </div>
-      </div>
-
-      <div className="about-content-wrapper">
-        {/* Mission Grid */}
-        {/* Mission Section */}
-        <div className="mission-container">
-          <div className="mission-card main full-width">
-            <h3>Our Mission</h3>
-            <p>
-              Rentfix was started by users who were tired of endless emails and phone tag.
-              We realized there had to be a better way to report leaking faucets or broken heaters.
-            </p>
-          </div>
-        </div>
-
-        {/* Why Trust Rentfix Section */}
-        <div className="trust-section">
-          <h2>Why Trust Rentfix?</h2>
-          <div className="trust-grid">
-            <div className="mission-card">
-              <div className="icon-box-soft blue"><FaRocket /></div>
-              <h4>Speed</h4>
-              <p>Report issues in seconds.</p>
-            </div>
-            <div className="mission-card">
-              <div className="icon-box-soft green"><FaHandshake /></div>
-              <h4>Trust</h4>
-              <p>Transparent updates for all.</p>
-            </div>
-            <div className="mission-card">
-              <div className="icon-box-soft purple"><FaLightbulb /></div>
-              <h4>Clarity</h4>
-              <p>Know exactly what's happening.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Team Section */}
-        <div className="team-section">
-          <h2>Meet the Team</h2>
-          <p className="team-sub">The minds behind the platform.</p>
-
-          <div className="team-grid">
-            {['Kimberly Ayiaki', 'Ronny Nyabuto', 'Tamara Chebet', 'Maingi Mugambi'].map((name, i) => (
-              <div className="team-card-modern" key={i}>
-                <div className="team-avatar-modern">
-                  <span className="initials">{name.split(' ').map(n => n[0]).join('')}</span>
-                </div>
-                <h3>{name}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      </main>
     </div>
   );
 }
