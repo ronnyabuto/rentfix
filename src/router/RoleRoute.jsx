@@ -10,7 +10,7 @@ export default function RoleRoute({ allow, children }) {
     return <div style={{ padding: 24 }}>Loading...</div>;
   }
 
-  // If no user (shouldn't happen, but safe)
+  // If no user
   if (!currentUser) {
     return <Navigate to="/" replace />;
   }
