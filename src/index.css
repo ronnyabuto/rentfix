@@ -1,6 +1,3 @@
-/* src/index.css — Rentfix (sleek header + professional UI) */
-
-/* ---------- Theme ---------- */
 :root {
   color-scheme: light;
 
@@ -48,15 +45,9 @@ button, input, select, textarea { font: inherit; }
   min-height: 100vh;
 }
 
-/* =========================================================
-   HEADER (SLEEK + LOGO)
-   Uses your existing markup:
-   - .t-simple-top
-   - left block contains .t-simple-brand + .t-simple-sub
-   - right is .t-simple-logout button
-   ========================================================= */
+/* HEADER  */
 
-/* Top bar: glass + border + subtle shadow */
+/* Top bar */
 .t-simple-top {
   height: 76px;
   padding: 0 22px;
@@ -100,7 +91,7 @@ button, input, select, textarea { font: inherit; }
   font-size: 13px;
 }
 
-/* Logout button — clean pill */
+/* Logout button */
 .t-simple-logout {
   border: 1px solid var(--line);
   background: #fff;
@@ -219,7 +210,7 @@ button, input, select, textarea { font: inherit; }
   line-height: 1.6;
 }
 
-/* Status pill */
+/* Status */
 .t-simple-status {
   align-self: flex-start;
   padding: 8px 12px;
@@ -304,7 +295,7 @@ button, input, select, textarea { font: inherit; }
 
 .home-hint { margin-top: 14px; color: var(--muted); font-size: 12px; }
 
-/* ---------- Report Issue form (professional) ---------- */
+/* ---------- Report Issue form ---------- */
 .t-form-card {
   border: 1px solid var(--line);
   padding: 22px;

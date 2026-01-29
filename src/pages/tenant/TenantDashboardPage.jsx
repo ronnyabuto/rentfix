@@ -66,7 +66,7 @@ export default function TenantDashboardPage() {
 }
 
 function formatRelative(iso) {
-  // very simple "days ago" display
+  // Day display
   try {
     const then = new Date(iso).getTime();
     const now = Date.now();
