@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMaintenanceReports } from "../../hooks/useMaintenanceReports";
 import { CATEGORY, PRIORITY } from "../../utils/constants";
@@ -9,7 +9,7 @@ export default function ReportIssuePage() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([]); // FileList
 
   // optional fields (safe defaults)
   const [category, setCategory] = useState(CATEGORY.PLUMBING);
@@ -21,9 +21,8 @@ export default function ReportIssuePage() {
     e.preventDefault();
     if (!canSubmit) return;
 
-    // NOTE: we’re not uploading to a server (SPA demo)
-    // We'll store file names only (keeps it simple).
-    const photos = Array.from(files || []).map((f) => f.name);
+    // ✅ Create preview URLs so images can render
+    const photos = Array.from(files || []).map((f) => URL.createObjectURL(f));
 
     createReport({
       title: title.trim(),
@@ -33,7 +32,6 @@ export default function ReportIssuePage() {
       photos,
     });
 
-    // go back to dashboard after submit
     nav("/tenant/dashboard");
   };
 
@@ -52,7 +50,7 @@ export default function ReportIssuePage() {
 
       <main className="t-simple-main">
         <div className="t-simple-headrow">
-          <h2 className="t-simple-h2">Your Issues</h2>
+          <h2 className="t-simple-h2">Report an Issue</h2>
         </div>
 
         {/* FORM CARD */}
@@ -116,10 +114,28 @@ export default function ReportIssuePage() {
               <input
                 className="t-form-input"
                 type="file"
+                accept="image/*"
                 multiple
                 onChange={(e) => setFiles(e.target.files)}
               />
             </div>
+
+            {/* ✅ Preview selected images BEFORE submit */}
+            {files && files.length > 0 && (
+              <div className="t-form-photos">
+                <div className="t-form-photos-label">Selected Photos:</div>
+                <div className="issue-photos">
+                  {Array.from(files).map((f, i) => (
+                    <img
+                      key={i}
+                      src={URL.createObjectURL(f)}
+                      alt={`Selected ${i + 1}`}
+                      className="issue-photo"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="t-form-actions">
               <button className="t-simple-btn" disabled={!canSubmit}>
@@ -162,10 +178,21 @@ export default function ReportIssuePage() {
 
                   <div className="t-simple-desc">{issue.description}</div>
 
+                  {/* ✅ Render stored photo URLs as images */}
                   {issue.photos?.length > 0 && (
                     <div className="t-form-photos">
-                      <span className="t-form-photos-label">Photos:</span>{" "}
-                      {issue.photos.join(", ")}
+                      <div className="t-form-photos-label">Photos:</div>
+                      <div className="issue-photos">
+                        {issue.photos.map((url, idx) => (
+                          <img
+                            key={idx}
+                            src={url}
+                            alt={`Issue ${idx + 1}`}
+                            className="issue-photo"
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>

@@ -1,13 +1,14 @@
-// src/components/issues/IssueCard.jsx
-import React from 'react';
-import { FaClock, FaUser, FaBuilding } from 'react-icons/fa';
-import StatusBadge from '../common/StatusBadge';
-import Button from '../common/Button';
+import React from "react";
+import { FaClock, FaUser, FaBuilding } from "react-icons/fa";
+import StatusBadge from "../common/StatusBadge";
+import Button from "../common/Button";
+import PhotoPreview from "./PhotoPreview";
 
 const IssueCard = ({ issue, isLandlord = false, onUpdate }) => {
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    if (!dateString) return "";
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   return (
@@ -19,28 +20,31 @@ const IssueCard = ({ issue, isLandlord = false, onUpdate }) => {
             <StatusBadge status={issue.status} />
             {issue.priority && <StatusBadge status={issue.priority} />}
           </div>
-          
+
           <p className="text-gray-600 mb-3">{issue.description}</p>
-          
-          <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+
+          {/* ✅ Photos preview (shows real images) */}
+          <PhotoPreview photos={issue.photos || []} />
+
+          <div className="flex flex-wrap gap-4 text-sm text-gray-500 mt-3">
             <div className="flex items-center">
               <FaClock className="mr-1" />
-              <span>Reported {formatDate(issue.reportedDate)}</span>
+              <span>Reported {formatDate(issue.createdAt)}</span>
             </div>
-            
+
             {isLandlord && (
               <>
                 <div className="flex items-center">
                   <FaUser className="mr-1" />
-                  <span>{issue.tenant}</span>
+                  <span>{issue.tenantId}</span>
                 </div>
                 <div className="flex items-center">
                   <FaBuilding className="mr-1" />
-                  <span>{issue.unit}</span>
+                  <span>{issue.propertyId}</span>
                 </div>
               </>
             )}
-            
+
             {issue.assignedTo && (
               <div className="text-blue-600 font-medium">
                 Technician: {issue.assignedTo}
@@ -48,18 +52,18 @@ const IssueCard = ({ issue, isLandlord = false, onUpdate }) => {
             )}
           </div>
         </div>
-        
+
         {isLandlord && onUpdate && (
           <Button variant="secondary" size="small" onClick={() => onUpdate(issue)}>
             UPDATE
           </Button>
         )}
       </div>
-      
+
       {issue.updates && issue.updates.length > 0 && (
         <div className="mt-4 pt-4 border-t border-gray-200">
           <p className="text-sm text-gray-600">
-            Latest: {issue.updates[issue.updates.length - 1].text}
+            Latest: {issue.updates[issue.updates.length - 1].message}
           </p>
         </div>
       )}
