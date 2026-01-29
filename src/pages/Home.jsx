@@ -53,6 +53,10 @@ export default function Home() {
           Continue as {selected}
         </button>
 
+        <div className="home-hint" style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => nav('/about')}>
+          About Rentfix
+        </div>
+
       </div>
     </div>
   );
