@@ -1,8 +1,10 @@
 // src/components/common/Navbar.jsx
 import React from 'react';
+import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FaHome, FaClipboardList, FaCog, FaUser } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
+
 
 const Navbar = () => {
   const { currentUser, switchUser } = useAppContext();
@@ -20,27 +22,27 @@ const Navbar = () => {
             <div className="hidden md:ml-6 md:flex md:space-x-8">
               {isTenant ? (
                 <>
-                  <Link
-                    to="/"
+                  <a
+                    href="/"
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-blue-600"
                   >
                     <FaHome className="mr-2" />
                     Dashboard
-                  </Link>
-                  <Link
-                    to="/reports"
+                  </a>
+                  <a
+                    href="/reports"
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700"
                   >
                     <FaClipboardList className="mr-2" />
                     My Reports
-                  </Link>
-                  <Link
-                    to="/settings"
+                  </a>
+                  <a
+                    href="/settings"
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700"
                   >
                     <FaCog className="mr-2" />
                     Settings
-                  </Link>
+                  </a>
                 </>
               ) : (
                 null
@@ -61,10 +63,10 @@ const Navbar = () => {
               </div>
               <div className="ml-3">
                 <p className="text-sm font-medium text-gray-700">
-                  {currentUser?.fullName}
+                  {currentUser ? currentUser.fullName : 'Guest'}
                 </p>
                 {!isTenant && (
-                  <p className="text-xs text-gray-500">Admin</p>
+                  <p className="text-xs text-gray-500">admin</p>
                 )}
               </div>
             </div>

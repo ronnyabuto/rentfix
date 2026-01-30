@@ -1,47 +1,19 @@
-import { useNavigate } from "react-router-dom";
-
+// ./pages/About.jsx
+import React from 'react';
 export default function About() {
-  const nav = useNavigate();
-
-  const team = [
-    { name: "Kimberly", role: "Layouts & Pages" },
-    { name: "Tamara", role: "UI Components & Styling" },
-    { name: "Nyabuto", role: "Data & Logic" },
-    { name: "Mugambi", role: "Routing & Navigation" },
-  ];
-
   return (
-    <div className="l-simple-page">
-      <header className="t-simple-top">
-        <div>
-          <div className="t-simple-brand">Rentfix</div>
-          <div className="t-simple-sub">About the Team</div>
-        </div>
+    <div className="about-page">
+      <h1>About Rentfix</h1>
+      <p>Rentfix is a maintenance request management system designed to streamline communication between tenants and landlords. Our platform allows tenants to easily report and track maintenance issues, while landlords can efficiently manage and resolve repair requests.</p>
+      <h2>Features</h2>
+      <ul>
+        <li>Submit and track maintenance requests</li>
+        <li>Landlord dashboard for managing requests</li>
+        <li>Real-time updates and notifications</li>
 
-        <button className="t-simple-logout" onClick={() => nav("/")}>
-          Back Home
-        </button>
-      </header>
-
-      <main className="t-simple-main">
-        <h2 className="t-simple-h2" style={{ marginBottom: 18 }}>Project Team</h2>
-
-        <div className="t-simple-list">
-          {team.map((member) => (
-            <div key={member.name} className="t-simple-card">
-              <div className="t-simple-title">{member.name}</div>
-              <div className="t-simple-meta">{member.role}</div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginTop: 24, padding: 22, background: "#f9fafb", borderRadius: 8 }}>
-          <div className="t-simple-title">Rentfix Application</div>
-          <p className="t-simple-desc">
-            A property management solution connecting tenants and landlords for efficient maintenance tracking.
-          </p>
-        </div>
-      </main>
+      </ul>
+      <h2>Our Mission</h2>
+      <p>At Rentfix, our mission is to enhance the rental experience for both tenants and landlords by providing a user-friendly platform that simplifies maintenance management and fosters better communication.</p>
     </div>
   );
 }

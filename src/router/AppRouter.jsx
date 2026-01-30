@@ -4,6 +4,8 @@ import MainLayout from "../layouts/MainLayout.jsx";
 
 import Home from "../pages/Home.jsx";
 import About from "../pages/About.jsx";
+import Login from "../pages/Login.jsx";
+import Register from "../pages/Register.jsx";
 
 import TenantDashboardPage from "../pages/tenant/TenantDashboardPage.jsx";
 import ReportIssuePage from "../pages/tenant/ReportIssuePage.jsx";
@@ -20,6 +22,8 @@ export default function AppRouter() {
       {/* Public pages (No Layout) */}
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* Tenant routes (Self-contained Layout) */}
       <Route

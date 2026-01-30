@@ -1,63 +1,47 @@
-import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
+'use client';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+// import './Home.css';
+import { useAppContext } from '../context/AppContext';
+import { FaInfoCircle } from 'react-icons/fa';
+import './Home.css';
+
+
+
 
 export default function Home() {
   const nav = useNavigate();
-  const { users, switchUser, currentUser } = useAppContext();
+  const { users, switchUser } = useAppContext();
+    const tenant = users.find((u) => u.role === 'tenant');
+    const landlord = users.find((u) => u.role === 'landlord');
 
-  const tenant = useMemo(() => users.find((u) => u.role === "tenant"), [users]);
-  const landlord = useMemo(() => users.find((u) => u.role === "landlord"), [users]);
-
-  const [selected, setSelected] = useState("tenant");
-
-  const continueNow = () => {
-    if (selected === "tenant" && tenant) {
+  const [selected, setSelected] = React.useState('tenant');
+    const continueNow = () => {
+    if (selected === 'tenant' && tenant) {
       switchUser(tenant.id);
-      nav("/tenant/dashboard");
+      nav('/tenant/dashboard');
       return;
     }
-    if (selected === "landlord" && landlord) {
+    if (selected === 'landlord' && landlord) {
       switchUser(landlord.id);
-      nav("/landlord/dashboard");
+      nav('/landlord/dashboard');
+      return;
     }
-  };
+    };
+    return (
+    <div className="home-page">
+           <div className="home-wrap">
+        <div className="home-card">
+          <h1 className="home-title">Rentfix</h1>
 
-  return (
-    <div className="home-wrap">
-      <div className="home-card">
-        <h1 className="home-title">Rentfix</h1>
-        <p className="home-sub">Maintenance request management</p>
-
-        <div
-          className={`home-role ${selected === "tenant" ? "active" : ""}`}
-          onClick={() => setSelected("tenant")}
-          role="button"
-          tabIndex={0}
-        >
-          <div className="home-role-title">Tenant</div>
-          <div className="home-role-sub">Report and track issues</div>
+          <div className="hero-image">
+            <img src="../assets/hero-mage.jpeg" alt="Hero" />
+          </div>
+          <p className="home-sub">Intelligent Property Management Solution</p>
         </div>
-
-        <div
-          className={`home-role ${selected === "landlord" ? "active" : ""}`}
-          onClick={() => setSelected("landlord")}
-          role="button"
-          tabIndex={0}
-        >
-          <div className="home-role-title">Landlord</div>
-          <div className="home-role-sub">Manage repair requests</div>
-        </div>
-
-        <button className="home-btn" onClick={continueNow}>
-          Continue as {selected}
-        </button>
-
-        <div className="home-hint" style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => nav('/about')}>
-          About Rentfix
-        </div>
-
       </div>
+
+          
     </div>
   );
 }
