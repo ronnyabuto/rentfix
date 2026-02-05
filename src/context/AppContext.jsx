@@ -20,42 +20,65 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     // 1. STATE: Where we store our data
-    // We update this to useLocalStorage so data persists on refresh!
-    const [currentUser, setCurrentUser] = useState(MOCK_USERS[0]); // Default to Landlord for demo
+    const [users, setUsers] = useLocalStorage('rentfix_users', MOCK_USERS);
+    const [currentUser, setCurrentUser] = useLocalStorage('rentfix_current_user', null);
     const [issues, setIssues] = useLocalStorage('rentfix_issues', []);
     const [loading, setLoading] = useState(true);
 
     // 2. EFFECT: Simulate fetching data from an API
     useEffect(() => {
-        // In a real app, this would be fetch('/api/issues')
-        // We use setTimeout to simulate network delay (makes it feel real)
         const loadData = () => {
             setLoading(true);
             setTimeout(() => {
-                // SEED DATA LOGIC:
-                // If we have no issues (first run), seed with mock data.
-                // If we have issues (from localStorage), keep them!
+                // SEED ISSUES LOGIC:
                 setIssues((prev) => {
                     if (prev && prev.length > 0) return prev;
                     return MOCK_ISSUES;
                 });
                 setLoading(false);
-            }, 500); // 0.5 second delay
+            }, 500);
         };
 
         loadData();
     }, []);
 
     // 3. ACTIONS: Functions to change state
-    // (We will move complex logic to custom hooks later, but basic ones can stay here)
+
+    const signup = (email, role, name) => {
+        const existing = users.find(u => u.email === email);
+        if (existing) throw new Error("Email already registered");
+
+        const newUser = {
+            id: `u_${Date.now()}`,
+            name: name || email.split('@')[0],
+            email,
+            role,
+            avatar: null
+        };
+
+        setUsers([...users, newUser]);
+        setCurrentUser(newUser);
+        return newUser;
+    };
+
+    const login = (email) => {
+        const user = users.find(u => u.email === email);
+        if (!user) throw new Error("User not found. Please sign up.");
+
+        setCurrentUser(user);
+        return user;
+    };
+
+    const logout = () => {
+        setCurrentUser(null);
+    };
 
     const switchUser = (userId) => {
-        const user = MOCK_USERS.find(u => u.id === userId);
+        const user = users.find(u => u.id === userId);
         if (user) setCurrentUser(user);
     };
 
     const addIssue = (newIssue) => {
-        // Prepend the new issue to the list
         setIssues([newIssue, ...issues]);
     };
 
@@ -70,12 +93,15 @@ export const AppProvider = ({ children }) => {
     // 4. EXPORT: What components can use
     const value = {
         currentUser,
+        users,
+        signup,
+        login,
+        logout,
         switchUser,
         issues,
         addIssue,
         updateIssueStatus,
-        properties: MOCK_PROPERTIES, // Static for now
-        users: MOCK_USERS,          // Static for now
+        properties: MOCK_PROPERTIES,
         loading
     };
 

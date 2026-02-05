@@ -1,25 +1,33 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
 export default function Home() {
-  const nav = useNavigate();
-  const { users, switchUser, currentUser } = useAppContext();
+  const navigate = useNavigate();
+  const { login, signup } = useAppContext();
 
-  const tenant = useMemo(() => users.find((u) => u.role === "tenant"), [users]);
-  const landlord = useMemo(() => users.find((u) => u.role === "landlord"), [users]);
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("tenant"); // Only for signup
+  const [name, setName] = useState(""); // Only for signup
+  const [error, setError] = useState("");
 
-  const [selected, setSelected] = useState("tenant");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
 
-  const continueNow = () => {
-    if (selected === "tenant" && tenant) {
-      switchUser(tenant.id);
-      nav("/tenant/dashboard");
-      return;
-    }
-    if (selected === "landlord" && landlord) {
-      switchUser(landlord.id);
-      nav("/landlord/dashboard");
+    try {
+      if (isLogin) {
+        const user = login(email);
+        if (user.role === 'landlord') navigate("/landlord/dashboard");
+        else navigate("/tenant/dashboard");
+      } else {
+        const user = signup(email, role, name);
+        if (user.role === 'landlord') navigate("/landlord/dashboard");
+        else navigate("/tenant/dashboard");
+      }
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -27,36 +35,63 @@ export default function Home() {
     <div className="home-wrap">
       <div className="home-card">
         <h1 className="home-title">Rentfix</h1>
-        <p className="home-sub">Maintenance request management</p>
+        <p className="home-sub" style={{ marginBottom: 20 }}>
+          {isLogin ? "Login to your account" : "Create a new account"}
+        </p>
 
-        <div
-          className={`home-role ${selected === "tenant" ? "active" : ""}`}
-          onClick={() => setSelected("tenant")}
-          role="button"
-          tabIndex={0}
-        >
-          <div className="home-role-title">Tenant</div>
-          <div className="home-role-sub">Report and track issues</div>
+        <form onSubmit={handleSubmit} className="home-form" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {!isLogin && (
+            <>
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="t-simple-input"
+                style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ddd' }}
+                required
+              />
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="t-simple-input"
+                style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ddd' }}
+              >
+                <option value="tenant">Tenant</option>
+                <option value="landlord">Landlord</option>
+              </select>
+            </>
+          )}
+
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="t-simple-input"
+            style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ddd' }}
+            required
+          />
+
+          {error && <p style={{ color: 'red', fontSize: '14px', margin: 0 }}>{error}</p>}
+
+          <button type="submit" className="home-btn" style={{ marginTop: '8px' }}>
+            {isLogin ? "Login" : "Sign Up"}
+          </button>
+        </form>
+
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+          <button
+            onClick={() => setIsLogin(!isLogin)}
+            style={{ background: 'none', border: 'none', color: '#007bff', cursor: 'pointer', fontSize: '14px' }}
+          >
+            {isLogin ? "Need an account? Sign Up" : "Already have an account? Login"}
+          </button>
         </div>
 
-        <div
-          className={`home-role ${selected === "landlord" ? "active" : ""}`}
-          onClick={() => setSelected("landlord")}
-          role="button"
-          tabIndex={0}
-        >
-          <div className="home-role-title">Landlord</div>
-          <div className="home-role-sub">Manage repair requests</div>
-        </div>
-
-        <button className="home-btn" onClick={continueNow}>
-          Continue as {selected}
-        </button>
-
-        <div className="home-hint" style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => nav('/about')}>
+        <div className="home-hint" style={{ marginTop: '20px', textAlign: 'center', cursor: 'pointer' }} onClick={() => navigate('/about')}>
           About Rentfix
         </div>
-
       </div>
     </div>
   );
