@@ -3,7 +3,7 @@
 React SPA connecting tenants and landlords for transparent maintenance tracking.
 
 ## Live Demo
-[Vercel Deployment Link] (Coming soon)
+https://rentfix.vercel.app/
 
 ## Problem Statement
 Tenants struggle to report broken utilities clearly. Landlords can't track repair status efficiently. Communication is fragmented.
@@ -49,7 +49,7 @@ A reusable utility hook that syncs React state with the browser's `localStorage`
 
 ## Team Structure & Roles
 - **Kimberly Ayiaki:** Project Lead & Layout Design
-- **Ronny Nyabuto:** Data Architecture & State Logic (Person 3)
+- **Ronny Nyabuto:** Data Architecture & State Logic
 - **Tamara Chebet:** UI Components & Styling
 - **Maingi Mugambi:** Routing & Navigation
 
