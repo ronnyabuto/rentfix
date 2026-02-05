@@ -11,7 +11,6 @@ export default function LandlordDashboardPage() {
 
   const [activeTab, setActiveTab] = useState("all");
 
-  // counts (always correct)
   const counts = useMemo(() => {
     const pending = reports.filter((r) => r.status === STATUS.PENDING).length;
     const inProgress = reports.filter((r) => r.status === STATUS.IN_PROGRESS).length;
@@ -25,7 +24,6 @@ export default function LandlordDashboardPage() {
     };
   }, [reports]);
 
-  // filtered list (tab switching)
   const filtered = useMemo(() => {
     if (activeTab === "all") return reports;
     if (activeTab === "pending") return reports.filter((r) => r.status === STATUS.PENDING);
@@ -42,7 +40,7 @@ export default function LandlordDashboardPage() {
           <div className="t-simple-sub">Landlord Dashboard</div>
         </div>
 
-        <button className="t-simple-logout" onClick={() => nav("/")}>
+        <button className="t-simple-logout" onClick={handleLogout}>
           Logout
         </button>
       </header>
@@ -52,7 +50,6 @@ export default function LandlordDashboardPage() {
           Maintenance Requests
         </h2>
 
-        {/* Tabs */}
         <div className="l-tabs">
           <button
             className={`l-tab ${activeTab === "all" ? "active" : ""}`}
@@ -83,7 +80,6 @@ export default function LandlordDashboardPage() {
           </button>
         </div>
 
-        {/* List */}
         {loading ? (
           <div className="t-simple-muted">Loading requests...</div>
         ) : filtered.length === 0 ? (

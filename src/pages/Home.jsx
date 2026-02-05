@@ -8,8 +8,8 @@ export default function Home() {
 
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("tenant"); // Only for signup
-  const [name, setName] = useState(""); // Only for signup
+  const [role, setRole] = useState("tenant");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {

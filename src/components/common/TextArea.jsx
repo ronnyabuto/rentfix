@@ -1,14 +1,13 @@
-// src/components/common/TextArea.jsx
 import React from 'react';
 
-const TextArea = ({ 
-  label, 
-  placeholder, 
-  value, 
+const TextArea = ({
+  label,
+  placeholder,
+  value,
   onChange,
   rows = 4,
   error,
-  ...props 
+  ...props
 }) => {
   return (
     <div className="mb-4">
@@ -22,9 +21,8 @@ const TextArea = ({
         onChange={onChange}
         placeholder={placeholder}
         rows={rows}
-        className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-          error ? 'border-red-500' : 'border-gray-300'
-        }`}
+        className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${error ? 'border-red-500' : 'border-gray-300'
+          }`}
         {...props}
       />
       {error && (
@@ -35,4 +33,3 @@ const TextArea = ({
 };
 
 export default TextArea;
-// src/components/issues/IssueHeader.jsx

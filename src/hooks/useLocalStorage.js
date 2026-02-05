@@ -1,14 +1,6 @@
-/**
- * useLocalStorage.js
- * 
- * Custom hook to sync state with the browser's LocalStorage.
- * allowing data to persist even if the user refreshes the page.
- */
-
 import { useState, useEffect } from 'react';
 
 export const useLocalStorage = (key, initialValue) => {
-    // 1. Initialize State
     const [storedValue, setStoredValue] = useState(() => {
         try {
             // Get from local storage by key
@@ -21,7 +13,6 @@ export const useLocalStorage = (key, initialValue) => {
         }
     });
 
-    // 2. Return a wrapped version of useState's setter function
     const setValue = (value) => {
         try {
             // Allow value to be a function so we have same API as useState

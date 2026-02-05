@@ -3,14 +3,13 @@ import { useMaintenanceReports } from "../../hooks/useMaintenanceReports";
 import { useAppContext } from "../../context/AppContext";
 
 export default function TenantDashboardPage() {
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const { reports, loading } = useMaintenanceReports();
-  const { switchUser, users } = useAppContext();
+  const { logout } = useAppContext();
 
-  const logout = () => {
-    // optional: switch to landlord or just go home
-    // switchUser(users[0].id);
-    nav("/");
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   return (
@@ -21,7 +20,7 @@ export default function TenantDashboardPage() {
           <div className="t-simple-sub">Tenant Dashboard</div>
         </div>
 
-        <button className="t-simple-logout" onClick={logout}>
+        <button className="t-simple-logout" onClick={handleLogout}>
           Logout
         </button>
       </header>
@@ -66,7 +65,6 @@ export default function TenantDashboardPage() {
 }
 
 function formatRelative(iso) {
-  // very simple "days ago" display
   try {
     const then = new Date(iso).getTime();
     const now = Date.now();

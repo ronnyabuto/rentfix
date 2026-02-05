@@ -1,41 +1,10 @@
-import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMaintenanceReports } from "../../hooks/useMaintenanceReports";
-import { CATEGORY, PRIORITY } from "../../utils/constants";
+import IssueForm from "../../components/forms/IssueForm";
 
 export default function ReportIssuePage() {
-  const nav = useNavigate();
-  const { createReport, reports, loading } = useMaintenanceReports();
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [files, setFiles] = useState([]);
-
-  // optional fields (safe defaults)
-  const [category, setCategory] = useState(CATEGORY.PLUMBING);
-  const [priority, setPriority] = useState(PRIORITY.MEDIUM);
-
-  const canSubmit = title.trim() && description.trim();
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (!canSubmit) return;
-
-    // NOTE: we’re not uploading to a server (SPA demo)
-    // We'll store file names only (keeps it simple).
-    const photos = Array.from(files || []).map((f) => f.name);
-
-    createReport({
-      title: title.trim(),
-      description: description.trim(),
-      category,
-      priority,
-      photos,
-    });
-
-    // go back to dashboard after submit
-    nav("/tenant/dashboard");
-  };
+  const navigate = useNavigate();
+  const { reports, loading } = useMaintenanceReports();
 
   return (
     <div className="t-simple-page">
@@ -45,134 +14,44 @@ export default function ReportIssuePage() {
           <div className="t-simple-sub">Tenant Dashboard</div>
         </div>
 
-        <button className="t-simple-logout" onClick={() => nav("/")}>
+        <button className="t-simple-logout" onClick={() => navigate("/")}>
           Logout
         </button>
       </header>
 
       <main className="t-simple-main">
         <div className="t-simple-headrow">
-          <h2 className="t-simple-h2">Your Issues</h2>
+          <h2 className="t-simple-h2">Report Maintenance Issue</h2>
         </div>
 
-        {/* FORM CARD */}
-        <div className="t-form-card">
-          <form onSubmit={onSubmit}>
-            <div className="t-form-field">
-              <label className="t-form-label">Issue Title</label>
-              <input
-                className="t-form-input"
-                placeholder="e.g., Broken window in bedroom"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-
-            <div className="t-form-field">
-              <label className="t-form-label">Description</label>
-              <textarea
-                className="t-form-input t-form-textarea"
-                placeholder="Describe the issue in detail..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-
-            {/* Optional dropdowns */}
-            <div className="t-form-grid">
-              <div className="t-form-field">
-                <label className="t-form-label">Category</label>
-                <select
-                  className="t-form-input"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  {Object.values(CATEGORY).map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="t-form-field">
-                <label className="t-form-label">Priority</label>
-                <select
-                  className="t-form-input"
-                  value={priority}
-                  onChange={(e) => setPriority(e.target.value)}
-                >
-                  {Object.values(PRIORITY).map((p) => (
-                    <option key={p} value={p}>
-                      {p}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="t-form-field">
-              <label className="t-form-label">Photos</label>
-              <input
-                className="t-form-input"
-                type="file"
-                multiple
-                onChange={(e) => setFiles(e.target.files)}
-              />
-            </div>
-
-            <div className="t-form-actions">
-              <button className="t-simple-btn" disabled={!canSubmit}>
-                Submit Issue
-              </button>
-
-              <button
-                type="button"
-                className="t-form-cancel"
-                onClick={() => nav("/tenant/dashboard")}
-              >
-                Cancel
-              </button>
-            </div>
-
-            {!canSubmit && (
-              <div className="t-form-hint">Title and description are required.</div>
-            )}
-          </form>
+        <div style={{ marginBottom: 40 }}>
+          <IssueForm />
         </div>
 
-        {/* LIST BELOW */}
-        <div className="t-form-listwrap">
-          {loading ? (
-            <div className="t-simple-muted">Loading issues...</div>
-          ) : reports.length === 0 ? (
-            <div className="t-simple-muted">No issues yet.</div>
-          ) : (
-            <div className="t-simple-list">
-              {reports.map((issue) => (
-                <div key={issue.id} className="t-simple-card">
-                  <div className="t-simple-card-top">
-                    <div>
-                      <div className="t-simple-title">{issue.title}</div>
-                      <div className="t-simple-meta">{formatRelative(issue.createdAt)}</div>
-                    </div>
+        <div className="t-simple-headrow" style={{ marginTop: 40 }}>
+          <h2 className="t-simple-h2">History</h2>
+        </div>
 
-                    <div className="t-simple-status">{issue.status}</div>
+        {loading ? (
+          <div className="t-simple-muted">Loading history...</div>
+        ) : reports.length === 0 ? (
+          <div className="t-simple-muted">No history found.</div>
+        ) : (
+          <div className="t-simple-list">
+            {reports.slice(0, 3).map((issue) => (
+              <div key={issue.id} className="t-simple-card">
+                <div className="t-simple-card-top">
+                  <div>
+                    <div className="t-simple-title">{issue.title}</div>
+                    <div className="t-simple-meta">{formatRelative(issue.createdAt)}</div>
                   </div>
-
-                  <div className="t-simple-desc">{issue.description}</div>
-
-                  {issue.photos?.length > 0 && (
-                    <div className="t-form-photos">
-                      <span className="t-form-photos-label">Photos:</span>{" "}
-                      {issue.photos.join(", ")}
-                    </div>
-                  )}
+                  <div className="t-simple-status">{issue.status}</div>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
+                <div className="t-simple-desc">{issue.description}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
